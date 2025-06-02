@@ -51,12 +51,13 @@ ssize_t get_input(char *in_ptr) {
  * Return: number of tokens.
  */
 size_t tokenize_input(char *in_ptr, char **tokens) {
-    // TODO: Remove unused attribute
-    __attribute__((unused)) char *curr_ptr = strtok (in_ptr, DELIMITERS);
+    char *curr_ptr = strtok (in_ptr, DELIMITERS);
     size_t token_count = 0;
 
-    while (0) {  // TODO: Fix this
-        // TODO: Fix this
+    while (0) {
+        tokens[token_count] = curr_ptr; // Store token in the array
+        token_count++;
+        curr_ptr = strtok(NULL, DELIMITERS);
     }
     tokens[token_count] = NULL;
     return token_count;
