@@ -9,10 +9,9 @@
 
 
 
-// You can remove __attribute__((unused)) once argc and argv are used.
 int main(__attribute__((unused)) int argc, 
          __attribute__((unused)) char* argv[]) {
-    //char *prompt = "mysh$ "; // TODO Step 1, Uncomment this.
+    char *prompt = "mysh$ ";
 
     char input_buf[MAX_STR_LEN + 1];
     input_buf[MAX_STR_LEN] = '\0';
@@ -23,6 +22,7 @@ int main(__attribute__((unused)) int argc,
 
         // TODO Step 2:
         // Display the prompt via the display_message function.
+        display_message(prompt);
 
 
         int ret = get_input(input_buf);
@@ -30,7 +30,8 @@ int main(__attribute__((unused)) int argc,
 
         // Clean exit
         // TODO: The next line has a subtle issue.
-        if (ret != -1 && (token_count == 0 || (strncmp("exit", token_arr[0], 4) == 0))) {
+        if ((token_count > 0 && strcmp("exit", token_arr[0]) == 0) 
+        || (token_count == 0 && (input_buf[0]!='\n' && ret==0))) {
             break;
         }
 
