@@ -69,4 +69,12 @@ char *expand_variables(const char *token) {
     if (!result) return NULL;
     size_t len = 0;
     const char *curr = token;
+
+    while (*curr && len < MAX_STR_LEN) {
+        if (*curr == '$') {
+            curr++;
+            const char *start = curr;
+            while (*curr && *curr != ' ' && *curr != '\t' && *curr != '\n' && *curr != '$') curr++;
+            char var_name[MAX_STR_LEN + 1];
+        }
 }
