@@ -76,5 +76,17 @@ char *expand_variables(const char *token) {
             const char *start = curr;
             while (*curr && *curr != ' ' && *curr != '\t' && *curr != '\n' && *curr != '$') curr++;
             char var_name[MAX_STR_LEN + 1];
+            strncpy(var_name, start, curr - start);
+            var_name[curr - start] = '\0';
+            const char *value = get_variable(var_name);
+            size_t val_len = strlen(value);
+            if (len + val_len > MAX_STR_LEN) val_len = MAX_STR_LEN - len;
+            strncpy(result + len, value, val_len);
+            len += val_len;
+        } else {
+            result[len++] = *curr++;
         }
+    }
+    result[len] = '\0';
+    return result;
 }
