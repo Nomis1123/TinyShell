@@ -62,3 +62,11 @@ size_t tokenize_input(char *in_ptr, char **tokens) {
     tokens[token_count] = NULL;
     return token_count;
 }
+
+
+char *expand_variables(const char *token) {
+    char *result = malloc(MAX_STR_LEN + 1);
+    if (!result) return NULL;
+    size_t len = 0;
+    const char *curr = token;
+}
