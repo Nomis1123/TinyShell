@@ -10,3 +10,8 @@ typedef struct variable {
 } variable_t;
 
 void set_variable(const char *name, const char *value);
+const char *get_variable(const char *name);
+void delete_variable(const char *name);
+void cleanup_variables();
+
+#endif
