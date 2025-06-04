@@ -39,4 +39,26 @@ void delete_variable(const char *name) {
     variable_t *prev = NULL;
     while (current != NULL) {
         if (strcmp(current->name, name) == 0) {
-            if (prev) prev->next = current->next;}}}
+            if (prev) prev->next = current->next;
+            else variables = current->next;
+            free(current->name);
+            free(current->value);
+            free(current);
+            return;
+        }
+        prev = current;
+        current = current->next;
+    }
+}
+
+void cleanup_variables() {
+    variable_t *current = variables;
+    while (current) {
+        variable_t *next = current->next;
+        free(current->name);
+        free(current->value);
+        free(current);
+        current = next;
+    }
+    variables = NULL;
+}
