@@ -3,11 +3,9 @@
 #include <string.h>
 #include <sys/types.h>
 #include <unistd.h>
-
+#include "variables.h"
 #include "builtins.h"
 #include "io_helpers.h"
-
-
 
 int main() {
     char *prompt = "mysh$ ";

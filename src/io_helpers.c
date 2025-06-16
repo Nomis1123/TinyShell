@@ -2,7 +2,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdio.h>
-
+#include "variables.h"
 #include "io_helpers.h"
 
 
@@ -17,7 +17,7 @@ void display_message(char *str) {
 
 /* Prereq: pre_str, str are NULL terminated string
  */
-void display_error(char *pre_str, char *str) {
+void display_error(const char *pre_str, const char *str) {
     write(STDERR_FILENO, pre_str, strnlen(pre_str, MAX_STR_LEN));
     write(STDERR_FILENO, str, strnlen(str, MAX_STR_LEN));
     write(STDERR_FILENO, "\n", 1);
@@ -51,18 +51,20 @@ ssize_t get_input(char *in_ptr) {
  * Return: number of tokens.
  */
 size_t tokenize_input(char *in_ptr, char **tokens) {
+    // TODO: Remove unused attribute
     char *curr_ptr = strtok (in_ptr, DELIMITERS);
     size_t token_count = 0;
 
-    while (0) {
+    while (curr_ptr != NULL) {  // TODO: Fix this
+        // TODO: Fix this
+        
         tokens[token_count] = curr_ptr; // Store token in the array
         token_count++;
-        curr_ptr = strtok(NULL, DELIMITERS);
+        curr_ptr = strtok(NULL, DELIMITERS); 
     }
     tokens[token_count] = NULL;
     return token_count;
 }
-
 
 char *expand_variables(const char *token) {
     char *result = malloc(MAX_STR_LEN + 1);

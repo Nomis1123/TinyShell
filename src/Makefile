@@ -8,7 +8,7 @@ mysh: mysh.o builtins.o variables.o io_helpers.o
 mysh.o: mysh.c builtins.h variables.h io_helpers.h
 	gcc ${CFLAGS} -c $<
 
-builtins.o: builtins.c builtins.h io_helpers.h
+builtins.o: builtins.c builtins.h
 	gcc ${CFLAGS} -c $<
 
 variables.o: variables.c variables.h

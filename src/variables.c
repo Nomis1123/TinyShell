@@ -22,7 +22,6 @@ void set_variable(const char *name, const char *value) {
     variables = new_var;
 }
 
-
 const char *get_variable(const char *name) {
     variable_t *current = variables;
     while (current != NULL) {

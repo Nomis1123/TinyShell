@@ -8,11 +8,6 @@
 #include "variables.h"
 #include "io_helpers.h"
 
-
-/* Type for builtin handling functions
- * Input: Array of tokens
- * Return: >=0 on success and -1 on error
- */
 typedef ssize_t (*bn_ptr)(char **);
 ssize_t bn_echo(char **tokens);
 ssize_t bn_ls(char **tokens);
