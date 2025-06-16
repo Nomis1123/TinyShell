@@ -1,22 +1,21 @@
 #include <string.h>
-
+#include <stdlib.h>
+#include <stdio.h>
+#include <dirent.h>
+#include <stdbool.h>
+#include <sys/stat.h>
 #include "builtins.h"
-#include "io_helpers.h"
+#include <time.h>
 
-
-// ====== Command execution =====
-
-/* Return: index of builtin or -1 if cmd doesn't match a builtin
- */
+// ====== Builtin Registry =====
 bn_ptr check_builtin(const char *cmd) {
-    ssize_t cmd_num = 0;
-    while (cmd_num < BUILTINS_COUNT &&
-           strncmp(BUILTINS[cmd_num], cmd, MAX_STR_LEN) != 0) {
-        cmd_num += 1;
+    for (ssize_t i = 0; i < BUILTINS_COUNT; i++) {
+        if (strcmp(BUILTINS[i], cmd) == 0) {
+            return BUILTINS_FN[i];
+        }
     }
-    return BUILTINS_FN[cmd_num];
+    return NULL;
 }
-
 
 // ====== echo =====
 ssize_t bn_echo(char **tokens) {
@@ -33,7 +32,6 @@ ssize_t bn_echo(char **tokens) {
     display_message("\n");
     return 0;
 }
-
 
 // ====== ls =====
 static void list_directory(const char *path, LsOptions options, int current_depth) {
@@ -84,7 +82,7 @@ static void list_directory(const char *path, LsOptions options, int current_dept
 
 }
 
-size_t bn_ls(char **tokens) {
+ssize_t bn_ls(char **tokens) {
     LsOptions options = {0, -1, NULL, "."};
     char *path = NULL;
     int path_provided = 0;
