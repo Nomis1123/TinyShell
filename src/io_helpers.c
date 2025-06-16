@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include "variables.h"
 #include "io_helpers.h"
+#include <ctype.h>
 
 
 // ===== Output helpers =====
@@ -69,17 +70,30 @@ size_t tokenize_input(char *in_ptr, char **tokens) {
 char *expand_variables(const char *token) {
     char *result = malloc(MAX_STR_LEN + 1);
     if (!result) return NULL;
+
     size_t len = 0;
     const char *curr = token;
 
     while (*curr && len < MAX_STR_LEN) {
         if (*curr == '$') {
             curr++;
-            const char *start = curr;
-            while (*curr && *curr != ' ' && *curr != '\t' && *curr != '\n' && *curr != '$') curr++;
-            char var_name[MAX_STR_LEN + 1];
-            strncpy(var_name, start, curr - start);
-            var_name[curr - start] = '\0';
+            char var_name[MAX_STR_LEN] = {0};
+            size_t var_len = 0;
+
+            // Handle ${VAR} syntax
+            if (*curr == '{') {
+                curr++;
+                while (*curr && *curr != '}' && var_len < MAX_STR_LEN - 1) {
+                    var_name[var_len++] = *curr++;
+                }
+                if (*curr == '}') curr++;
+            } else {
+                // Handle $VAR syntax
+                while (isalnum(*curr) && var_len < MAX_STR_LEN - 1) {
+                    var_name[var_len++] = *curr++;
+                }
+            }
+
             const char *value = get_variable(var_name);
             size_t val_len = strlen(value);
             if (len + val_len > MAX_STR_LEN) val_len = MAX_STR_LEN - len;
