@@ -11,7 +11,7 @@
 /* Prereq: pre_str, str are NULL terminated string
  */
 void display_message(char *str);
-void display_error(char *pre_str, char *str);
+void display_error(const char *pre_str, const char *str);
 
 
 /* Prereq: in_ptr points to a character buffer of size > MAX_STR_LEN
@@ -26,5 +26,7 @@ ssize_t get_input(char *in_ptr);
  */
 size_t tokenize_input(char *in_ptr, char **tokens);
 
+// Add declaration
+char *expand_variables(const char *token);
 
 #endif
