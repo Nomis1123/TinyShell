@@ -38,26 +38,11 @@ Welcome to TinyShell! This project is a minimalist shell, similar to `bash` or `
 
 ## Compilation
 
-To compile TinyShell, you'll need a C compiler like `gcc`. The project is set up to be compiled with strict warnings and sanitizers for robust development.
-
-```bash
-gcc -g -Wall -Wextra -Werror -Wpedantic \
-    -fsanitize=address,leak,object-size,bounds-strict,undefined \
-    -fsanitize=address-use-after-scope \
-    mysh.c builtins.c io_helpers.c variables.c -o mysh
-
-## Compilation
-
-To compile TinyShell, you'll need a C to run the makefile included.
-
-```bash
-make
+To compile TinyShell, you'll need a C to run the makefile included: 
+`make`
 
 ## Usage
-
-After compilation, run the shell:
-
-```bash
-./mysh
+After compilation, run the shell: 
+`./mysh`
 
     
