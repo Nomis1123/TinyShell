@@ -3,8 +3,6 @@
 
 Welcome to TinyShell! This project is a minimalist shell, similar to `bash` or `zsh`, implemented in C. It's designed to demonstrate core concepts of systems programming, including process management, inter-process communication (IPC) via pipes, signal handling, and basic networking features.
 
-This shell was developed as part of the CSC209: Software Tools and Systems Programming course.
-
 ## Features
 
 *   **Command Execution:** Executes external commands found in the system's `PATH` (e.g., `/bin/ls`, `/bin/cat`).
@@ -29,7 +27,7 @@ This shell was developed as part of the CSC209: Software Tools and Systems Progr
 *   **Background Processes (`&`):** Executes a command in the background.
     *   Example: `sleep 10 &`
 *   **Signal Handling:**
-    *   Handles `SIGINT` (Ctrl+C) gracefully, redisplaying the prompt without exiting the shell (for most operations).
+    *   Handles `SIGINT` (Ctrl+C), redisplaying the prompt without exiting the shell (for most operations).
     *   Manages background job completion notifications.
 *   **Networking (Client/Server Model):**
     *   `start-server <port>`: Starts a simple multi-client chat server in the background on the specified port. The server echoes messages from any client to all other connected clients.
@@ -47,5 +45,19 @@ gcc -g -Wall -Wextra -Werror -Wpedantic \
     -fsanitize=address,leak,object-size,bounds-strict,undefined \
     -fsanitize=address-use-after-scope \
     mysh.c builtins.c io_helpers.c variables.c -o mysh
+
+## Compilation
+
+To compile TinyShell, you'll need a C to run the makefile included.
+
+```bash
+make
+
+## Usage
+
+After compilation, run the shell:
+
+```bash
+./mysh
 
     
